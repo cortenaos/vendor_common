@@ -1,0 +1,28 @@
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+# Copyright (C) 2026-present The CortenaOS Project
+#
+
+PRODUCT_VERSION_MAJOR := 1
+PRODUCT_VERSION_MINOR := 0
+
+CORTENA_CODENAME := Avalon
+
+CORTENA_BUILD_DATE := $(shell date -u +%Y%m%d)
+
+# Release type
+CORTENA_BUILDTYPE ?= UNOFFICIAL
+ifeq ($(OFFICIAL_BUILD),true)
+    CORTENA_BUILDTYPE := OFFICIAL
+endif
+
+# Version strings
+CORTENA_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(CORTENA_CODENAME)-$(CORTENA_BUILD_DATE)-$(CORTENA_BUILDTYPE)-$(CORTENA_BUILD)
+CORTENA_DISPLAY_VERSION := CortenaOS-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(CORTENA_CODENAME)-$(CORTENA_BUILDTYPE)
+
+# System properties
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.cortena.version=$(CORTENA_VERSION) \
+    ro.cortena.codename=$(CORTENA_CODENAME) \
+    ro.cortena.build.type=$(CORTENA_BUILDTYPE) \
+    ro.cortena.display.version=$(CORTENA_DISPLAY_VERSION)
